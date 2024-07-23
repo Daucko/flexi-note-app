@@ -42,13 +42,13 @@ const DateComponent = ({ day, month }) => {
     <div>
       <Title>RECENT NOTES</Title>
       <DatesWrapper>
-        {dates.filter((date) => {
+        {/* {dates.filter((date) => {
           const newDate = {
             day: day,
             month: month,
           };
           setDate([...dates, newDate]);
-        })}
+        })} */}
         {day && month ? (
           <DateContainer>
             {day} <Separator></Separator> {month}
