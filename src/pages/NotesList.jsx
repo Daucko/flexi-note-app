@@ -3,9 +3,11 @@ import { VscSearch } from 'react-icons/vsc';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import Logo from '../assets/logo.jpeg';
 import FolderSection from '../components/FolderSection';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import DateComponent from '../components/DateComponent';
 import Modal from '../components/Modal';
+import TextEditor from '../components/TextEditor';
+import { ColorDiv, colors, Container, num } from '../components/ColoredDivs';
 
 const Wrapper = styled.main`
   min-height: 100vh;
@@ -24,6 +26,7 @@ const PlusIcon = styled.span`
 `;
 
 const Title = styled.h1`
+  padding-left: 2rem;
   font-size: 1.5rem;
   color: #003049;
 `;
@@ -61,16 +64,18 @@ const NavBar = styled.nav`
 const NotesList = () => {
   const [day, setDay] = useState();
   const [month, setMonth] = useState();
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState();
+  const [notes, setNotes] = useState([
+    {
+      title: 'Title',
+      content: 'content',
+    },
+  ]);
+
   const [isModalOpen, setModalOpen] = useState(false);
 
   const openModal = () => setModalOpen(true);
-  const closeModal = () => {
-    const date = new Date();
-    setDay(date.getDate());
-    setMonth(months[date.getMonth()]);
-    console.log(day, month);
-    setModalOpen(false);
-  };
 
   const months = [
     'January',
@@ -87,6 +92,32 @@ const NotesList = () => {
     'December',
   ];
 
+  const date = new Date();
+  let todayDate = date.getDate();
+  let todayMonth = months[date.getMonth()];
+
+  const closeModal = () => {
+    setDay(todayDate);
+    setMonth(todayMonth);
+    setModalOpen(false);
+  };
+
+  const noteText = (title, text) => {
+    setTitle(title);
+    setContent(text);
+  };
+
+  useEffect(() => {
+    const newNote = {
+      title: title,
+      content: content,
+      day: day,
+      month: month,
+    };
+    console.log(newNote.day, newNote.month);
+    setNotes([...notes, newNote]);
+  }, [content]);
+
   return (
     <Wrapper>
       <NavBar>
@@ -102,14 +133,28 @@ const NotesList = () => {
             <AiFillPlusCircle color="#C1111F" size={40} />
           </PlusIcon>
           <Modal isOpen={isModalOpen} onClose={closeModal}>
-            <h2>Modal Header</h2>
-            <p>This is the content of the modal.</p>
+            <TextEditor noteText={noteText} />
           </Modal>
         </div>
       </NavBar>
       <Title>NotesList</Title>;{/* <FolderSection /> */}
       <DateComponent day={day} month={month} />
-      <div></div>
+      <div>
+        {notes.map((note) => {
+          // if ((note.day === todayDate) & (note.month === todayMonth)) {
+          return (
+            <Container>
+              <ColorDiv bgColor={colors[num]}>
+                <h1>{note.title}</h1>
+                <p>
+                  {<div dangerouslySetInnerHTML={{ __html: note.content }} />}
+                </p>
+              </ColorDiv>
+            </Container>
+          );
+          // }
+        })}
+      </div>
     </Wrapper>
   );
 };
