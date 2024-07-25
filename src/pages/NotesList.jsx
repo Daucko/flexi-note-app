@@ -8,6 +8,8 @@ import DateComponent from '../components/DateComponent';
 import Modal from '../components/Modal';
 import TextEditor from '../components/TextEditor';
 import { ColorDiv, colors, Container, num } from '../components/ColoredDivs';
+import TestModal from '../components/TestModal';
+import QuillModal from '../components/QuillModal';
 
 const Wrapper = styled.main`
   min-height: 100vh;
@@ -66,6 +68,7 @@ const NotesList = () => {
   const [month, setMonth] = useState();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState();
+  const [isTrue, setIsTrue] = useState(false);
   const [notes, setNotes] = useState([
     {
       title: 'Title',
@@ -73,9 +76,17 @@ const NotesList = () => {
     },
   ]);
 
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => setModalOpen(true);
+  // Function to open the modal
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const months = [
     'January',
@@ -96,11 +107,11 @@ const NotesList = () => {
   let todayDate = date.getDate();
   let todayMonth = months[date.getMonth()];
 
-  const closeModal = () => {
-    setDay(todayDate);
-    setMonth(todayMonth);
-    setModalOpen(false);
-  };
+  // const closeModal = () => {
+  //   setDay(todayDate);
+  //   setMonth(todayMonth);
+  //   setModalOpen(false);
+  // };
 
   const noteText = (title, text) => {
     setTitle(title);
@@ -118,6 +129,8 @@ const NotesList = () => {
     setNotes([...notes, newNote]);
   }, [content]);
 
+  console.log(isTrue);
+
   return (
     <Wrapper>
       <NavBar>
@@ -132,14 +145,15 @@ const NotesList = () => {
           <PlusIcon onClick={openModal}>
             <AiFillPlusCircle color="#C1111F" size={40} />
           </PlusIcon>
-          <Modal isOpen={isModalOpen} onClose={closeModal}>
+          {/* <Modal isOpen={isModalOpen} onClose={closeModal}>
             <TextEditor noteText={noteText} />
-          </Modal>
+          </Modal> */}
         </div>
       </NavBar>
       <Title>NotesList</Title>;{/* <FolderSection /> */}
       <DateComponent day={day} month={month} />
-      <div>
+      <QuillModal isModalOpen={isModalOpen} closeModal={closeModal} />
+      {/* <div>
         {notes.map((note) => {
           // if ((note.day === todayDate) & (note.month === todayMonth)) {
           return (
@@ -154,7 +168,7 @@ const NotesList = () => {
           );
           // }
         })}
-      </div>
+      </div> */}
     </Wrapper>
   );
 };

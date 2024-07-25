@@ -48,7 +48,7 @@ const Modal = styled.div`
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 `;
 
-const ColoredDivs = () => {
+const TestModal = () => {
   const [divs, setDivs] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [colorIndex, setColorIndex] = useState(0);
@@ -78,4 +78,4 @@ const ColoredDivs = () => {
   );
 };
 
-export default ColoredDivs;
+export default TestModal;
