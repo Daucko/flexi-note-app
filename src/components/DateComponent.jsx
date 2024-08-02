@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 const DatesWrapper = styled.section`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  // gap: 0.5rem;
-  justify-content: space-between;
+  justify-content: space-around;
   padding-inline: 2rem;
   // border: 2px solid green;
   // background: blue;
@@ -36,6 +36,21 @@ const Title = styled.p`
   padding: 2rem;
 `;
 
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
 const DateComponent = ({ day, month }) => {
   // const [dates, setDates] = useState([
   //   {
@@ -58,7 +73,7 @@ const DateComponent = ({ day, month }) => {
 
   const formatDate = (date) => {
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const month = months[date.getMonth()];
     const day = String(date.getDate()).padStart(2, '0');
     return { year: `${year}`, month: `${month}`, day: `${day}` };
   };
@@ -69,7 +84,7 @@ const DateComponent = ({ day, month }) => {
     const today = new Date();
 
     // Add previous 5 days
-    for (let i = 7; i > 0; i--) {
+    for (let i = 2; i > 0; i--) {
       const date = new Date();
       date.setDate(today.getDate() - i);
       dates.push(formatDate(date));
@@ -79,7 +94,7 @@ const DateComponent = ({ day, month }) => {
     dates.push(formatDate(today));
 
     // Add next 5 days
-    for (let i = 1; i <= 7; i++) {
+    for (let i = 1; i <= 2; i++) {
       const date = new Date();
       date.setDate(today.getDate() + i);
       dates.push(formatDate(date));
@@ -90,13 +105,7 @@ const DateComponent = ({ day, month }) => {
 
   const dates = getDates();
 
-  // useEffect(() => {
-  //   const newDate = {
-  //     day: day,
-  //     month: month,
-  //   };
-  //   setDates([...dates, newDate]);
-  // }, [day, month]);
+  const handleClick = () => {};
 
   return (
     <div>
