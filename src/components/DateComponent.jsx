@@ -22,6 +22,7 @@ const DateContainer = styled.div`
   padding: 0.5rem;
   width: 3.5rem;
   cursor: pointer;
+  color: #003049;
 `;
 
 const Separator = styled.div`
@@ -34,6 +35,7 @@ const Title = styled.p`
   font-weight: 1px;
   font-size: 0.8rem;
   padding: 2rem;
+  color: #003049;
 `;
 
 const months = [
@@ -50,6 +52,21 @@ const months = [
   'November',
   'December',
 ];
+
+{
+  /* <Form onSubmit={handleSubmit}>
+          <SearchIcon>
+            <VscSearch color="black" size="20" />
+          </SearchIcon>
+          <Input
+            type="text"
+            name="text"
+            value={searchContent}
+            onChange={(e) => setSearchContent(e.target.value)}
+            placeholder="Search..."
+          />
+        </Form> */
+}
 
 const DateComponent = ({ day, month }) => {
   // const [dates, setDates] = useState([

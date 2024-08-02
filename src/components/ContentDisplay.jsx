@@ -1,9 +1,7 @@
 // src/ContentDisplay.js
 import React from 'react';
 import styled from 'styled-components';
-import { LiaEditSolid } from 'react-icons/lia';
-import { AiFillDelete } from 'react-icons/ai';
-
+import { HoverDeleteText, HoverEditText } from './HoverText';
 const ContentWrapper = styled.div`
   background-color: ${({ color }) => color};
   padding: 10px;
@@ -23,16 +21,40 @@ const Button = styled.button`
   color: white;
   border: none;
   cursor: pointer;
+
+  &:hover {
+    content: 'Delete';
+  }
+`;
+
+const DeleteButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+`;
+
+const EditButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 60px;
+  background: blue;
+  color: white;
+  border: none;
+  cursor: pointer;
 `;
 
 const ContentDisplay = ({ content, color, onDelete, onEdit }) => (
   <ContentWrapper color={color}>
     <div dangerouslySetInnerHTML={{ __html: content }} />
     <Button position="edit" onClick={onEdit}>
-      <LiaEditSolid color="black" size={20} />
+      <HoverEditText />
     </Button>
     <Button position="delete" onClick={onDelete}>
-      <AiFillDelete color="red" size={20} />
+      <HoverDeleteText />
     </Button>
   </ContentWrapper>
 );
