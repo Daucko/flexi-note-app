@@ -25,6 +25,21 @@ const colors = [
   'rgba(102, 155, 188, 0.3)',
 ];
 
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
 const Wrapper = styled.main`
   min-height: 100vh;
   margin: 0;
@@ -100,6 +115,18 @@ const Home = () => {
     setIsNight(!isNight);
   };
 
+  let getDate;
+
+  if (contents.length !== 0) {
+    getDate = contents.map((content) => {
+      const date = new Date(content.id);
+      const year = date.getFullYear();
+      const month = months[date.getMonth()];
+      const day = String(date.getDate()).padStart(2, '0');
+      return { year: `${year}`, month: `${month}`, day: `${day}` };
+    });
+  }
+
   return (
     <ThemeProvider theme={isNight ? nightTheme : dayTheme}>
       <GlobalStyles />
@@ -114,7 +141,7 @@ const Home = () => {
             </PlusIcon>
           </div>
         </NavBar>
-        <DateComponent />
+        <DateComponent contents={contents} />
         {contents.length === 0 && (
           <EmptyDiv>
             <h2>There's no note yet.</h2>
@@ -135,6 +162,7 @@ const Home = () => {
             color={colors[index % colors.length]}
             onDelete={() => deleteContent(item.id)}
             onEdit={() => openModal(item)}
+            getDate={getDate}
           />
         ))}
       </Wrapper>

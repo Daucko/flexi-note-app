@@ -53,7 +53,7 @@ const months = [
   'December',
 ];
 
-const DateComponent = ({ day, month }) => {
+const DateComponent = ({ contents }) => {
   // const [dates, setDates] = useState([
   //   {
   //     day: 22,
@@ -72,6 +72,10 @@ const DateComponent = ({ day, month }) => {
   //     month: 7,
   //   },
   // ]);
+
+  // const handleClick = () => {
+  //   contents.map((content) => console.log(content.id));
+  // };
 
   const formatDate = (date) => {
     const year = date.getFullYear();
@@ -106,8 +110,6 @@ const DateComponent = ({ day, month }) => {
   };
 
   const dates = getDates();
-
-  const handleClick = () => {};
 
   return (
     <div>
