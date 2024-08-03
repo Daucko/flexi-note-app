@@ -7,8 +7,6 @@ const DatesWrapper = styled.section`
   align-items: center;
   justify-content: space-around;
   padding-inline: 2rem;
-  // border: 2px solid green;
-  // background: blue;
 `;
 
 const DateContainer = styled.div`
