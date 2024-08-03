@@ -8,7 +8,6 @@
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
-  /* background: #fdf0d5; */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -19,8 +18,4 @@
 body {
   margin: 0;
   background: rgba(253, 240, 213, 0.1);
-  /* text-align: center; */
-  /* color: #e6ddf9; */
-  /* justify-content: ; */
-  /* color: rgb(123, 104, 238); */
 }

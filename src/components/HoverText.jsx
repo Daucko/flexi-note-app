@@ -1,4 +1,3 @@
-// src/HoverText.js
 import React from 'react';
 import styled from 'styled-components';
 import { LiaEditSolid } from 'react-icons/lia';
@@ -8,6 +7,7 @@ const IconWrapper = styled.div`
   position: relative;
   display: inline-block;
   cursor: pointer;
+  color: ${({ theme }) => theme.colors.icon};
 
   &:hover span {
     visibility: visible;
@@ -46,14 +46,14 @@ const TooltipText = styled.span`
 
 export const HoverEditText = () => (
   <IconWrapper>
-    <LiaEditSolid color="black" size={20} />
+    <LiaEditSolid size={20} />
     <TooltipText>Edit Note.</TooltipText>
   </IconWrapper>
 );
 
 export const HoverDeleteText = () => (
   <IconWrapper>
-    <RiDeleteBin2Line color="black" size={20} />
+    <RiDeleteBin2Line size={20} />
     <TooltipText>Delete Note.</TooltipText>
   </IconWrapper>
 );
