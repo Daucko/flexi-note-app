@@ -66,7 +66,7 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [editableContent, setEditableContent] = useState(null);
 
-  const [isNight, setIsNight] = useState(true);
+  const [isNight, setIsNight] = useState(false);
 
   const openModal = (content = null) => {
     setEditableContent(content);
