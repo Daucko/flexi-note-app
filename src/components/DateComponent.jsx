@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import CurrentTime from './CurrentTime';
 
 const DatesWrapper = styled.section`
   display: flex;
@@ -11,71 +12,78 @@ const DatesWrapper = styled.section`
 
 const DateContainer = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: between;
-  // background: rgba(0, 0, 0, 0.1);
   background-color: ${({ theme }) => theme.colors.background};
   color: ${({ theme }) => theme.colors.text};
   border: 2px solid red;
   border-radius: 1rem;
   padding: 0.5rem;
-  width: 3.5rem;
-  cursor: pointer;
-`;
-
-const Separator = styled.div`
-  background: rgba(0, 0, 0, 0.2);
-  height: 0.2rem;
-  width: 100%;
 `;
 
 const Title = styled.p`
-  font-weight: 1px;
-  font-size: 0.8rem;
-  padding: 2rem;
+  font-weight: bold;
+  font-size: 2rem;
+  padding-inline: 2rem;
+  background-color: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.text};
+
+  @media (max-width: 780px) {
+    text-align: center;
+  }
+`;
+
+const WelcomeText = styled.p`
+  font-size: 1.5rem;
+  text-align: center;
+  padding-inline: 2rem;
   background-color: ${({ theme }) => theme.colors.background};
   color: ${({ theme }) => theme.colors.text};
 `;
 
+const TimeWrapper = styled.div`
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+
+  @media (max-width: 400px) {
+    flex-direction: column;
+    gap: 5px;
+  }
+`;
+
+const TimeDescription = styled.div`
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 10px;
+  background: #c1111f;
+  color: ${({ theme }) => theme.colors.background};
+`;
+
+const DateComp = styled.span`
+  font-size: 2rem;
+  padding: 5px;
+`;
+
 const months = [
-  'January',
-  'February',
+  'Jan',
+  'Feb',
   'March',
   'April',
   'May',
   'June',
   'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
+  'Aug',
+  'Sept',
+  'Oct',
+  'Nov',
+  'Dec',
 ];
 
 const DateComponent = ({ contents }) => {
-  // const [dates, setDates] = useState([
-  //   {
-  //     day: 22,
-  //     month: 7,
-  //   },
-  //   {
-  //     day: 23,
-  //     month: 7,
-  //   },
-  //   {
-  //     day: 24,
-  //     month: 7,
-  //   },
-  //   {
-  //     day: 25,
-  //     month: 7,
-  //   },
-  // ]);
-
-  // const handleClick = () => {
-  //   contents.map((content) => console.log(content.id));
-  // };
+  const today = new Date();
 
   const formatDate = (date) => {
     const year = date.getFullYear();
@@ -84,45 +92,25 @@ const DateComponent = ({ contents }) => {
     return { year: `${year}`, month: `${month}`, day: `${day}` };
   };
 
-  // Function to get an array of dates
-  const getDates = () => {
-    const dates = [];
-    const today = new Date();
-
-    // Add previous 5 days
-    for (let i = 2; i > 0; i--) {
-      const date = new Date();
-      date.setDate(today.getDate() - i);
-      dates.push(formatDate(date));
-    }
-
-    // Add today
-    dates.push(formatDate(today));
-
-    // Add next 5 days
-    for (let i = 1; i <= 2; i++) {
-      const date = new Date();
-      date.setDate(today.getDate() + i);
-      dates.push(formatDate(date));
-    }
-
-    return dates;
-  };
-
-  const dates = getDates();
+  const todayDate = formatDate(today);
 
   return (
     <div>
-      <Title>RECENT NOTES</Title>
-      <DatesWrapper>
-        {dates.map((date) => {
-          return (
-            <DateContainer>
-              {date.day} <Separator></Separator> {date.month}
-            </DateContainer>
-          );
-        })}
-      </DatesWrapper>
+      <WelcomeText> Welcome to your new note-taking hub!</WelcomeText>
+      <Title>
+        Keep all your notes organized: easily create, edit, and access them in
+        one place.
+      </Title>
+
+      <TimeWrapper>
+        <TimeDescription>TODAY</TimeDescription>
+        <DateContainer>
+          <DateComp>{todayDate.day}</DateComp>
+          <DateComp>{todayDate.month}</DateComp>
+          <DateComp>{todayDate.year}</DateComp>
+        </DateContainer>
+        <CurrentTime />
+      </TimeWrapper>
     </div>
   );
 };

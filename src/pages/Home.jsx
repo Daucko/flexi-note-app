@@ -26,18 +26,18 @@ const colors = [
 ];
 
 const months = [
-  'January',
-  'February',
+  'Jan.',
+  'Feb.',
   'March',
   'April',
   'May',
   'June',
   'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
+  'Aug.',
+  'Sept.',
+  'Oct.',
+  'Nov.',
+  'Dec.',
 ];
 
 const Wrapper = styled.main`
@@ -52,10 +52,26 @@ const AppWrapper = styled.div`
 `;
 
 const NavBar = styled.nav`
+  // position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2rem;
+  padding: 1rem 2rem;
+
+  @media (max-width: 780px) {
+    padding: 1rem;
+  }
+`;
+
+const NavRHS = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 2rem;
+
+  @media (max-width: 780px) {
+    flex-direction: column-reverse;
+    padding: 1rem;
+  }
 `;
 
 const PlusIcon = styled.span`
@@ -130,16 +146,16 @@ const Home = () => {
   return (
     <ThemeProvider theme={isNight ? nightTheme : dayTheme}>
       <GlobalStyles />
-      <ThemeToggle toggleTheme={toggleTheme} style />
       <Wrapper>
         <NavBar>
           <img src={Logo} alt="" style={{ width: '5rem', height: '5rem' }} />
           <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-          <div>
+          <NavRHS>
             <PlusIcon onClick={() => openModal()}>
               <AiFillPlusCircle color="#C1111F" size={40} />
             </PlusIcon>
-          </div>
+            <ThemeToggle toggleTheme={toggleTheme} />
+          </NavRHS>
         </NavBar>
         <DateComponent contents={contents} />
         {contents.length === 0 && (

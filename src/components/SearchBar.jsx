@@ -7,9 +7,14 @@ const SearchInput = styled.input`
   width: 80%;
   max-width: 500px;
   border-radius: 20px;
-
+  border: 2px solid #6c6363;
   background-color: ${({ theme }) => theme.colors.background};
   color: ${({ theme }) => theme.colors.text};
+
+  &:focus {
+    border: none;
+    outline: 3px solid #c1111f;
+  }
 `;
 
 const SearchBar = ({ searchTerm, setSearchTerm }) => (

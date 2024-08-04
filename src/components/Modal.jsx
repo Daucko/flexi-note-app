@@ -27,6 +27,13 @@ const Overlay = styled.div`
   z-index: 999;
 `;
 
+const QuillButton = styled.button`
+  padding: 4px 8px;
+  border-radius: 5px;
+  border: 2px solid #c1111f;
+  color: #003049;
+`;
+
 const Modal = ({ addContent, closeModal, initialContent }) => {
   const [editorContent, setEditorContent] = useState(initialContent);
 
@@ -47,17 +54,19 @@ const Modal = ({ addContent, closeModal, initialContent }) => {
           onChange={setEditorContent}
           modules={{
             toolbar: [
-              [{ header: '1' }, { header: '2' }, { font: [] }],
-              [{ size: [] }],
-              ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-              [
-                { list: 'ordered' },
-                { list: 'bullet' },
-                { indent: '-1' },
-                { indent: '+1' },
-              ],
+              // [{ header: '1' }, { header: '2' }, { font: [] }],
+              [{ header: '1' }, { header: '2' }],
+              // [{ size: [] }],
+              // ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+              ['bold', 'italic', 'underline'],
+              // [
+              //   { list: 'ordered' },
+              //   { list: 'bullet' },
+              //   { indent: '-1' },
+              //   { indent: '+1' },
+              // ],
               ['link', 'image', 'video'],
-              ['clean'],
+              // ['clean'],
             ],
           }}
           formats={[
@@ -78,8 +87,8 @@ const Modal = ({ addContent, closeModal, initialContent }) => {
           ]}
           placeholder="Compose your content..."
         />
-        <button onClick={handleSave}>Save</button>
-        <button onClick={closeModal}>Close</button>
+        <QuillButton onClick={handleSave}>Save</QuillButton>
+        <QuillButton onClick={closeModal}>Close</QuillButton>
       </ModalWrapper>
     </>
   );

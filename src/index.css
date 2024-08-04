@@ -18,4 +18,10 @@
 body {
   margin: 0;
   background: rgba(253, 240, 213, 0.1);
+  /* color: #6c6363 */
+  /* font-weight: ; */
+}
+
+::selection {
+  background-color: #669bbc;
 }
